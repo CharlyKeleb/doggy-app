@@ -1,30 +1,37 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
-import 'package:flutter/material.dart';
+import 'package:doggy/view_model/home/breed_view_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:doggy/main.dart';
-
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  group('BreedViewModel', () {
+    late BreedViewModel breedViewModel;
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    setUp(() {
+      breedViewModel = BreedViewModel();
+    });
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    test('BreedViewModel initial values are correct', () {
+      expect(breedViewModel.loading, false);
+      expect(breedViewModel.images, []);
+      expect(breedViewModel.allBreeds, []);
+      expect(breedViewModel.breedAndSubBreedList, isEmpty);
+      expect(breedViewModel.selectedBreed, 'hound');
+      expect(breedViewModel.selectedSubBreed, 'afghan');
+      expect(breedViewModel.randomImageURL, isNull);
+      expect(breedViewModel.subBreedsMap, isEmpty);
+    });
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    test('getImagesByBreed sets images correctly', () async {
+      await breedViewModel.getImagesByBreed();
+
+      expect(breedViewModel.loading, false);
+      expect(breedViewModel.images, isNotEmpty);
+    });
+
+    test('getRandomImageByBreed sets randomImageURL correctly', () async {
+      await breedViewModel.getRandomImageByBreed();
+
+      expect(breedViewModel.loading, false);
+      expect(breedViewModel.randomImageURL, isNotNull);
+    });
   });
 }

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:doggy/components/navigate.dart';
 import 'package:doggy/utils/config.dart';
-import 'package:doggy/view_model/home/home_view_model.dart';
+import 'package:doggy/view_model/home/breed_view_model.dart';
 import 'package:doggy/views/home/screens/breed/breed_list.dart';
 import 'package:doggy/widgets/card_view.dart';
 import 'package:flutter/material.dart';
@@ -23,11 +23,11 @@ class _RandomImageByBreedState extends State<RandomImageByBreed> {
     super.initState();
 
     // Call the function immediately when the widget is first created
-    Provider.of<HomeViewModel>(context, listen: false).getRandomImageByBreed();
+    Provider.of<BreedViewModel>(context, listen: false).getRandomImageByBreed();
 
     // Create a timer to call the function every 1000 milliseconds
     _timer = Timer.periodic(const Duration(milliseconds: 2500), (timer) {
-      Provider.of<HomeViewModel>(context, listen: false)
+      Provider.of<BreedViewModel>(context, listen: false)
           .getRandomImageByBreed();
     });
   }
@@ -41,7 +41,7 @@ class _RandomImageByBreedState extends State<RandomImageByBreed> {
 
   @override
   Widget build(BuildContext context) {
-    HomeViewModel viewModel = Provider.of<HomeViewModel>(context);
+    BreedViewModel viewModel = Provider.of<BreedViewModel>(context);
     return Scaffold(
       body: SafeArea(
         child: Padding(

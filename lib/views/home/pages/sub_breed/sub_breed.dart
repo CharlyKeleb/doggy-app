@@ -3,7 +3,7 @@ import 'package:doggy/components/animated_card/custom_cards.dart';
 import 'package:doggy/components/navigate.dart';
 import 'package:doggy/model/enum/enum.dart';
 import 'package:doggy/utils/config.dart';
-import 'package:doggy/view_model/home/home_view_model.dart';
+import 'package:doggy/view_model/home/sub_breed_view_model.dart';
 import 'package:doggy/views/home/screens/sub_breed/random_by_sub_breed.dart';
 import 'package:doggy/views/home/screens/sub_breed/sub_breed_list.dart';
 import 'package:doggy/widgets/card_view.dart';
@@ -27,7 +27,7 @@ class _SubBreedState extends State<SubBreed> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      Provider.of<HomeViewModel>(context, listen: false)
+      Provider.of<SubBreedViewModel>(context, listen: false)
           .getImagesByBreedAndSubBreed();
     });
     super.initState();
@@ -38,7 +38,7 @@ class _SubBreedState extends State<SubBreed> {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = Provider.of<HomeViewModel>(context);
+    final viewModel = Provider.of<SubBreedViewModel>(context);
     // Make sure to check if there are images in the viewModel
     if (viewModel.images != null && viewModel.images!.isNotEmpty) {
       return Scaffold(
@@ -62,7 +62,7 @@ class _SubBreedState extends State<SubBreed> {
                         child: Row(
                           children: [
                             Text(
-                              'Select Sub-Breed',
+                              viewModel.selectedBreed,
                               style: Config.textTheme.labelSmall,
                             ),
                             const Icon(Icons.arrow_right)

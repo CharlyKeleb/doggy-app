@@ -2,8 +2,9 @@ import 'dart:async';
 
 import 'package:doggy/components/navigate.dart';
 import 'package:doggy/utils/config.dart';
-import 'package:doggy/view_model/home/home_view_model.dart';
+import 'package:doggy/view_model/home/sub_breed_view_model.dart';
 import 'package:doggy/views/home/screens/breed/breed_list.dart';
+import 'package:doggy/views/home/screens/sub_breed/sub_breed_list.dart';
 import 'package:doggy/widgets/card_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -21,13 +22,9 @@ class _RandomImageBySubBreedState extends State<RandomImageBySubBreed> {
   @override
   void initState() {
     super.initState();
-
-    // Call the function immediately when the widget is first created
-    Provider.of<HomeViewModel>(context, listen: false).getRandomImageByBreed();
-
     // Create a timer to call the function every 1000 milliseconds
     _timer = Timer.periodic(const Duration(milliseconds: 2500), (timer) {
-      Provider.of<HomeViewModel>(context, listen: false)
+      Provider.of<SubBreedViewModel>(context, listen: false)
           .getRandomImageByBreedAndSubBreed();
     });
   }
@@ -41,7 +38,7 @@ class _RandomImageBySubBreedState extends State<RandomImageBySubBreed> {
 
   @override
   Widget build(BuildContext context) {
-    HomeViewModel viewModel = Provider.of<HomeViewModel>(context);
+    SubBreedViewModel viewModel = Provider.of<SubBreedViewModel>(context);
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -70,12 +67,12 @@ class _RandomImageBySubBreedState extends State<RandomImageBySubBreed> {
                     const Spacer(),
                     GestureDetector(
                       onTap: () {
-                        Navigate.pushPageDialog(context, const BreedList());
+                        Navigate.pushPageDialog(context, const SubBreedList());
                       },
                       child: Row(
                         children: [
                           Text(
-                            viewModel.selectedBreed ?? "Select Breed",
+                            viewModel.selectedSubBreed,
                             style: Config.textTheme.labelSmall,
                           ),
                           const Padding(

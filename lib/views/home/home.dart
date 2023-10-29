@@ -46,6 +46,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return HiddenDrawerMenu(
+      slidePercent: 60,
       backgroundColorMenu: Theme.of(context).colorScheme.secondary,
       elevationAppBar: 0.5,
       screens: _pages,

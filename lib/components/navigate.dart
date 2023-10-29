@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-//helpoer class for navigation
+//helper class for navigation
 class Navigate {
   static Future pushPage(BuildContext context, Widget page,
       {String name = ''}) {

@@ -1,5 +1,5 @@
 import 'package:doggy/utils/config.dart';
-import 'package:doggy/view_model/home/home_view_model.dart';
+import 'package:doggy/view_model/home/breed_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,7 +13,8 @@ class BreedList extends StatefulWidget {
 class _BreedListState extends State<BreedList> {
   @override
   Widget build(BuildContext context) {
-    HomeViewModel viewModel = Provider.of<HomeViewModel>(context, listen: true);
+    BreedViewModel viewModel =
+        Provider.of<BreedViewModel>(context, listen: true);
     return Scaffold(
       appBar: AppBar(
         title: Text(

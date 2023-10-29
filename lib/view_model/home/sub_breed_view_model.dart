@@ -1,45 +1,24 @@
 import 'package:doggy/services/dogs_service.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
-class HomeViewModel extends ChangeNotifier {
-  //services
-  DogsService service = DogsService();
-
+class SubBreedViewModel extends ChangeNotifier {
   //booleans
   bool loading = false;
 
-  //list
+  //lists
   List<String>? images = [];
-  List<String>? allBreeds = [];
   List<String> breedAndSubBreedList = [];
+
+  //services
+  DogsService service = DogsService();
 
   //maps
   Map<String, List<String>> subBreedsMap = {};
 
-  // String breed
+  // Strings
   String selectedBreed = 'hound';
   String selectedSubBreed = 'afghan';
-
   String? randomImageURL;
-
-  //get dog images by breed
-  getImagesByBreed() async {
-    loading = true;
-    notifyListeners();
-    //clear the images
-    images!.clear();
-    var result = await service.getImagesByBreed(breed: selectedBreed);
-    try {
-      loading = false;
-      if (result!.status == "success") {
-        setImages(result.message);
-      }
-    } catch (e) {
-      loading = false;
-      notifyListeners();
-      print('Has Error');
-    }
-  }
 
   //get dog images by breed and sub breed
   getImagesByBreedAndSubBreed() async {
@@ -55,23 +34,6 @@ class HomeViewModel extends ChangeNotifier {
       loading = false;
       if (result!.status == "success") {
         setImages(result.message);
-      }
-    } catch (e) {
-      loading = false;
-      notifyListeners();
-      print('Has Error');
-    }
-  }
-
-  //get dog images by breed
-  getRandomImageByBreed() async {
-    loading = true;
-    notifyListeners();
-    var result = await service.randomImageByBreed(breed: selectedBreed);
-    try {
-      loading = false;
-      if (result!.status == "success") {
-        setRandomImage(result.message!);
       }
     } catch (e) {
       loading = false;
@@ -97,27 +59,6 @@ class HomeViewModel extends ChangeNotifier {
       loading = false;
       notifyListeners();
       print('Has Error');
-    }
-  }
-
-  Future<void> getDogBreeds() async {
-    loading = true;
-    notifyListeners();
-    try {
-      final breeds = await service.fetchDogBreeds();
-      for (var breed in breeds.keys) {
-        allBreeds?.addAll(breeds.keys);
-        print(breed);
-        final subBreeds = breeds[breed];
-        print('Sub-breeds for $breed: $subBreeds');
-        if (subBreeds != null && subBreeds.isNotEmpty) {
-          // If there are sub-breeds, add them to the list
-          subBreeds.addAll(subBreeds);
-        }
-      }
-      // You can now use the 'breeds' Map to access the list of breeds and their sub-breeds.
-    } catch (e) {
-      print('Error: $e');
     }
   }
 

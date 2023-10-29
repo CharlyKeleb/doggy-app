@@ -1,5 +1,5 @@
 import 'package:doggy/utils/config.dart';
-import 'package:doggy/view_model/home/home_view_model.dart';
+import 'package:doggy/view_model/home/sub_breed_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,7 +13,7 @@ class SubBreedList extends StatefulWidget {
 class _SubBreedListState extends State<SubBreedList> {
   @override
   Widget build(BuildContext context) {
-    HomeViewModel viewModel = Provider.of<HomeViewModel>(context, listen: true);
+    SubBreedViewModel viewModel = Provider.of<SubBreedViewModel>(context, listen: true);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -27,10 +27,6 @@ class _SubBreedListState extends State<SubBreedList> {
               onTap: () async {
                 viewModel.images!.clear();
                 Navigator.pop(context);
-                //get images list by breed
-                viewModel.getImagesByBreed();
-                //get random images by breed
-                viewModel.getRandomImageByBreed();
                 //get images by breed and sub breed
                 viewModel.getImagesByBreedAndSubBreed();
               },

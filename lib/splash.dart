@@ -1,7 +1,8 @@
 import 'dart:async';
 
 import 'package:doggy/components/navigate.dart';
-import 'package:doggy/view_model/home/home_view_model.dart';
+import 'package:doggy/view_model/home/breed_view_model.dart';
+import 'package:doggy/view_model/home/sub_breed_view_model.dart';
 import 'package:doggy/views/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -39,8 +40,8 @@ class _SplashState extends State<Splash> {
   }
 
   initApp() async {
-    await Provider.of<HomeViewModel>(context, listen: false).getDogBreeds();
-    await Provider.of<HomeViewModel>(context, listen: false)
+    await Provider.of<BreedViewModel>(context, listen: false).getDogBreeds();
+    await Provider.of<SubBreedViewModel>(context, listen: false)
         .getDogBreedAndSubBreed();
 
     startTimeout();
